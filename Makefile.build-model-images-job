@@ -1,0 +1,8 @@
+BUILD_WORKFLOW=build-image-and-push-using-docksock-wf.json
+
+get_pods:
+	/bin/kubectl get pods -n default
+
+do_build:
+	@set -x && cat $(BUILD_WORKFLOW) | sed -e 's/%MODEL_VERSION%/$(MODEL_VERSION)/' | /bin/kubectl -n default create -f -
+
