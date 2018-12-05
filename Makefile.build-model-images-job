@@ -11,5 +11,5 @@ do_build:
 	@set -x && \
 		echo "MODEL_VERSION[${MODEL_VERSION}]" && \
 		echo "GITHUB_USER[${GITHUB_USER}]" && \
-		echo "GITHUB_USER[${GITHUB_TOKEN}]"
+		echo "GITHUB_TOKEN[${GITHUB_TOKEN}]"
 

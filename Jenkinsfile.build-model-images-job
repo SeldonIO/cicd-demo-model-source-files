@@ -7,7 +7,8 @@ podTemplate(label: label, containers: [
         command: 'cat',
         ttyEnabled: true,
         envVars: [
-            secretEnvVar(key: 'GITHUB_USER', secretName: 'github-credentials', secretKey: 'user')
+            secretEnvVar(key: 'GITHUB_USER', secretName: 'github-credentials', secretKey: 'user'),
+            secretEnvVar(key: 'GITHUB_TOKEN', secretName: 'github-credentials', secretKey: 'token')
         ]),
 ],
 volumes: [
