@@ -10,6 +10,14 @@
                 {
                     "name": "model-version",
                     "value": "%MODEL_VERSION%"
+                },
+                {
+                    "name": "github-user",
+                    "value": "%GITHUB_USER%"
+                },
+                {
+                    "name": "github-token",
+                    "value": "%GITHUB_TOKEN%"
                 }
             ]
         },
@@ -83,7 +91,7 @@
                     "artifacts": [
                         {
                             "git": {
-                                "repo": "https://github.com/gsunner/cicd-demo-model-source-files.git",
+                                "repo": "https://{{workflow.parameters.github-user}}:{{workflow.parameters.github-token}}@github.com/{{workflow.parameters.github-user}}/cicd-demo-model-source-files.git",
                                 "revision": "master"
                             },
                             "name": "model-source-files",
@@ -113,7 +121,7 @@
                     "artifacts": [
                         {
                             "git": {
-                                "repo": "https://github.com/gsunner/cicd-demo-model-source-files.git",
+                                "repo": "https://{{workflow.parameters.github-user}}:{{workflow.parameters.github-token}}@github.com/{{workflow.parameters.github-user}}/cicd-demo-k8s-manifest-files.git",
                                 "revision": "master"
                             },
                             "name": "k8s-manifest-files",
@@ -140,4 +148,3 @@
         ]
     }
 }
-
