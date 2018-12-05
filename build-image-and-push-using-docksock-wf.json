@@ -83,7 +83,7 @@
                     "artifacts": [
                         {
                             "git": {
-                                "repo": "http://gogs:3000/drone/model-source-files.git",
+                                "repo": "https://github.com/gsunner/cicd-demo-model-source-files.git",
                                 "revision": "master"
                             },
                             "name": "model-source-files",
@@ -113,7 +113,7 @@
                     "artifacts": [
                         {
                             "git": {
-                                "repo": "http://drone:drone@gogs:3000/drone/k8s-manifest-files.git",
+                                "repo": "https://github.com/gsunner/cicd-demo-model-source-files.git",
                                 "revision": "master"
                             },
                             "name": "k8s-manifest-files",
