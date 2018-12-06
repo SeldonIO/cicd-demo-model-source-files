@@ -1,7 +1,15 @@
 def label = "worker-${UUID.randomUUID().toString()}"
 
 podTemplate(label: label, containers: [
-  containerTemplate(name: 'kubectl', image: 'seldonio/k8s-deployer:k8s_v1.10.0', command: 'cat', ttyEnabled: true),
+  containerTemplate(
+        name: 'kubectl',
+        image: 'seldonio/k8s-deployer:k8s_v1.10.0',
+        command: 'cat',
+        ttyEnabled: true,
+        envVars: [
+            secretEnvVar(key: 'GITHUB_USER', secretName: 'github-credentials', secretKey: 'user'),
+            secretEnvVar(key: 'GITHUB_TOKEN', secretName: 'github-credentials', secretKey: 'token')
+        ]),
 ],
 volumes: [
   hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock')

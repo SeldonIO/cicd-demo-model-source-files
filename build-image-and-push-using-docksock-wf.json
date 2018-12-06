@@ -10,6 +10,14 @@
                 {
                     "name": "model-version",
                     "value": "%MODEL_VERSION%"
+                },
+                {
+                    "name": "github-user",
+                    "value": "%GITHUB_USER%"
+                },
+                {
+                    "name": "github-token",
+                    "value": "%GITHUB_TOKEN%"
                 }
             ]
         },
@@ -52,7 +60,7 @@
                                 "parameters": [
                                     {
                                         "name": "cmdargs",
-                                        "value": "set -x && cd /work/k8s-manifest-files && make -f Makefile.ci update_model_manifest MODEL_VERSION={{workflow.parameters.model-version}} && git status -s && git config user.email test@test.com && git commit --allow-empty -m 'auto version update ({{workflow.parameters.model-version}})' model.json && git push"
+                                        "value": "set -x && cd /work/k8s-manifest-files && make -f Makefile.ci update_model_manifest MODEL_VERSION={{workflow.parameters.model-version}} && git status -s && git config user.email test@test.com && git commit --allow-empty -m 'auto version update ({{workflow.parameters.model-version}})' demo-manifests/model.json && git push"
                                     }
                                 ]
                             },
@@ -83,7 +91,7 @@
                     "artifacts": [
                         {
                             "git": {
-                                "repo": "https://github.com/gsunner/cicd-demo-model-source-files.git",
+                                "repo": "https://{{workflow.parameters.github-user}}:{{workflow.parameters.github-token}}@github.com/{{workflow.parameters.github-user}}/cicd-demo-model-source-files.git",
                                 "revision": "master"
                             },
                             "name": "model-source-files",
@@ -113,7 +121,7 @@
                     "artifacts": [
                         {
                             "git": {
-                                "repo": "https://github.com/gsunner/cicd-demo-model-source-files.git",
+                                "repo": "https://{{workflow.parameters.github-user}}:{{workflow.parameters.github-token}}@github.com/{{workflow.parameters.github-user}}/cicd-demo-k8s-manifest-files.git",
                                 "revision": "master"
                             },
                             "name": "k8s-manifest-files",
@@ -140,4 +148,3 @@
         ]
     }
 }
-
