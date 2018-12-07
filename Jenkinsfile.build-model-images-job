@@ -29,7 +29,7 @@ volumes: [
       container('kubectl') {
         sh 'pwd'
         sh 'ls -al'
-        sh "##make -f Makefile.build-model-images-job do_build MODEL_VERSION=v${BUILD_ID}"
+        sh "make -f Makefile.build-model-images-job do_build MODEL_VERSION=v${BUILD_ID}"
       }
     }
   }
