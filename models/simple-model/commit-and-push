@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -o nounset
+set -o errexit
+set -o pipefail
+set -o noclobber
+set -o noglob
+
+STARTUP_DIR="$( cd "$( dirname "$0" )" && pwd )"
+
+cd "${STARTUP_DIR}"
+set -o xtrace
+git commit -m 'update value' SimpleModel.py && git push
+
