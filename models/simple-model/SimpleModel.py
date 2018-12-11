@@ -3,5 +3,5 @@ class SimpleModel(object):
         print("Initializing")
 
     def predict(self,X,features_names):
-        return [[0.07]]
+        return [[0.08]]
 
