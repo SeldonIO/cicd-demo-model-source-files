@@ -3,7 +3,7 @@ def label = "worker-${UUID.randomUUID().toString()}"
 podTemplate(label: label, containers: [
   containerTemplate(
         name: 'kubectl',
-        image: 'seldonio/k8s-deployer:k8s_v1.10.0',
+        image: 'seldonio/k8s-deployer:k8s_v1.14.0',
         command: 'cat',
         ttyEnabled: true,
         envVars: [
