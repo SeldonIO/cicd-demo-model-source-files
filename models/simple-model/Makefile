@@ -7,8 +7,11 @@ watch_docker:
 
 build_model_image:
 	s2i build . seldonio/seldon-core-s2i-python2 $(IMAGE_NAME):$(MODEL_VERSION)
-	s2i build . seldonio/seldon-core-s2i-python2 $(IMAGE_NAME):$(MODEL_VERSION) --as-dockerfile Dockerfile
-	echo $$(cat Dockerfile)
+	echo "FROM $(IMAGE_NAME):$(MODEL_VERSION)" | docker build --label org.opencontainers.image.url="www.seldon.io" -t "$(IMAGE_NAME):$(MODEL_VERSION)" -
+	echo "FROM $(IMAGE_NAME):$(MODEL_VERSION)" | docker build --label org.opencontainers.image.created="$$(date -u +'%Y-%m-%dT%H:%M:%SZ')" -t "$(IMAGE_NAME):$(MODEL_VERSION)" -
+	echo "FROM $(IMAGE_NAME):$(MODEL_VERSION)" | docker build --label org.opencontainers.image.version="$(MODEL_VERSION)" -t "$(IMAGE_NAME):$(MODEL_VERSION)" -
+	echo "FROM $(IMAGE_NAME):$(MODEL_VERSION)" | docker build --label org.opencontainers.image.source="$$(git config --get remote.origin.url | rev | cut -f1 -d"@" | rev)" -t "$(IMAGE_NAME):$(MODEL_VERSION)" -
+	echo "FROM $(IMAGE_NAME):$(MODEL_VERSION)" | docker build --label org.opencontainers.image.revision="$$(git rev-parse HEAD)" -t "$(IMAGE_NAME):$(MODEL_VERSION)" -
 
 push_to_registry:
 	docker push $(IMAGE_NAME):$(MODEL_VERSION)
@@ -24,5 +27,8 @@ test_predict_call:
 
 build_model_image_using_docker:
 	docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock -v $$PWD:/work gsunner/s2i-tools:0.1 sh -c 's2i build . seldonio/seldon-core-s2i-python2 $(IMAGE_NAME):$(MODEL_VERSION)'
-	s2i build . seldonio/seldon-core-s2i-python2 $(IMAGE_NAME):$(MODEL_VERSION) --as-dockerfile Dockerfile
-	echo $$(cat Dockerfile)
+	echo "FROM $(IMAGE_NAME):$(MODEL_VERSION)" | docker build --label org.opencontainers.image.url="www.seldon.io" -t "$(IMAGE_NAME):$(MODEL_VERSION)" -
+	echo "FROM $(IMAGE_NAME):$(MODEL_VERSION)" | docker build --label org.opencontainers.image.created="$$(date -u +'%Y-%m-%dT%H:%M:%SZ')" -t "$(IMAGE_NAME):$(MODEL_VERSION)" -
+	echo "FROM $(IMAGE_NAME):$(MODEL_VERSION)" | docker build --label org.opencontainers.image.version="$(MODEL_VERSION)" -t "$(IMAGE_NAME):$(MODEL_VERSION)" -
+	echo "FROM $(IMAGE_NAME):$(MODEL_VERSION)" | docker build --label org.opencontainers.image.source="$$(git config --get remote.origin.url | rev | cut -f1 -d"@" | rev)" -t "$(IMAGE_NAME):$(MODEL_VERSION)" -
+	echo "FROM $(IMAGE_NAME):$(MODEL_VERSION)" | docker build --label org.opencontainers.image.revision="$$(git rev-parse HEAD)" -t "$(IMAGE_NAME):$(MODEL_VERSION)" -
