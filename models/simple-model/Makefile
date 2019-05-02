@@ -8,7 +8,7 @@ watch_docker:
 build_model_image:
 	s2i build . seldonio/seldon-core-s2i-python2 $(IMAGE_NAME):$(MODEL_VERSION)
 	s2i build . seldonio/seldon-core-s2i-python2 $(IMAGE_NAME):$(MODEL_VERSION) --as-dockerfile Dockerfile
-	cat Dockerfile
+	echo $$(cat Dockerfile)
 
 push_to_registry:
 	docker push $(IMAGE_NAME):$(MODEL_VERSION)
@@ -25,4 +25,4 @@ test_predict_call:
 build_model_image_using_docker:
 	docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock -v $$PWD:/work gsunner/s2i-tools:0.1 sh -c 's2i build . seldonio/seldon-core-s2i-python2 $(IMAGE_NAME):$(MODEL_VERSION)'
 	s2i build . seldonio/seldon-core-s2i-python2 $(IMAGE_NAME):$(MODEL_VERSION) --as-dockerfile Dockerfile
-    cat Dockerfile
+	echo $$(cat Dockerfile)
