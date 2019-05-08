@@ -27,6 +27,11 @@ build_model_image:
 push_to_registry:
 	docker push $(IMAGE_URL)
 
+serve_local:
+# Serving direct from python is on port 5000
+	pip install -r requirements.txt
+	exec seldon-core-microservice SimpleModel REST
+
 start_serving_model:
 	docker run --name=simple-model-service -d -p $(LOCAL_SERVICE_PORT):5000 $(IMAGE_URL)
 
