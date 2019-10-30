@@ -4,6 +4,7 @@ get_pods:
 	/bin/kubectl get pods -n default
 
 do_build:
+	/bin/kubectl version
 	@cat $(BUILD_WORKFLOW) | sed \
 		-e 's/%MODEL_VERSION%/$(MODEL_VERSION)/' \
 		-e "s/%GITHUB_USER%/${GITHUB_USER}/" \
